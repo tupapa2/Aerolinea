@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opciones de Vuelo | Dominican Jet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         :root {
+            --primary-color: #003366;
+            --secondary-color: #005792;
+            --accent-color: #BA0001;
+            --accent-hover: #BA0001;
+            --text-color: #333333;
+            --text-light: #FFFFFF;
+            --background-light: #F5F7FA;
+            --box-shadow: 0 8px 20px rgba(0, 33, 74, 0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .page-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .breadcrumb ul li {
+            margin-right: 10px;
+        }
+        
+        .breadcrumb ul li:after {
+            content: '>';
+            margin-left: 10px;
+        }
+        
+        .breadcrumb ul li:last-child:after {
+            content: '';
+        }
+        
+        .breadcrumb a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: #495057;
+            margin-right: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #dde2e6;
+        }
+        
+        .section-title {
+            margin: 40px 0 20px;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+        
+        .flight-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .flight-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .airline {
+            display: flex;
+            align-items: center;
+        }
+        
+        .airline-logo {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .airline-logo i {
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+        
+        .flight-class {
+            font-weight: 500;
+        }
+        
+        .flight-details {
+            display: flex;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .flight-route {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .flight-stop {
+            padding: 0 20px;
+        }
+        
+        .flight-city {
+            text-align: center;
+        }
+        
+        .flight-time {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .flight-date,
+        .flight-airport {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .flight-line {
+            flex: 1;
+            height: 2px;
+            background-color: var(--border-color);
+            position: relative;
+        }
+        
+        .flight-duration {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap;
+        }
+        
+        .flight-line.with-stop:before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .flight-info {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .flight-features {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+        
+        .flight-price-section {
+            text-align: right;
+        }
+        
+        .price-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .flight-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .select-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .select-btn:hover {
+            background-color: #9a0001;
+        }
+        
+        .more-options {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .load-more {
+            background-color: white;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .load-more:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .recommendations {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        
+        .recommendations h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .recommendation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .recommendation-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .recommendation-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .recommendation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .recommendation-content {
+            padding: 15px;
+        }
+        
+        .recommendation-destination {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .recommendation-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .recommendation-details {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .recommendation-btn {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .recommendation-btn:hover {
+            background-color: #002244;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+          /* Responsive */
+          @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .hero-content h2 {
+                font-size: 32px;
+            }
+            
+            section {
+                padding: 50px 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 28px;
+            }
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Dominican <span>Jet</span></div>
+                <nav>
+                    <ul>
+                       
+                       
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div class="page-title">
+        <div class="container">
+            <h1>Opciones de vuelo: </h1>
+            <p>Selecciona el vuelo que mejor se adapte a tus necesidades</p>
+        </div>
+    </div>
+   
+    <section>
+        <div class="container">
+            <div class="filters">
+                <div class="filter-row">
+                 
+                  
+              
+            </div>
+            
+            <h2 class="section-title">Vuelos disponibles:</h2>
+            
+            <!-- Vuelo 1 -->
+            <div class="flight-card">
+                <div class="flight-header">
+                    <div class="airline">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="airline-name">Dominican Jet</div>
+                    </div>
+                    <div class="flight-class"></div>
+                </div>
+                <div class="flight-details">
+                    <div class="flight-route">
+                        <div class="flight-city">
+                            <div class="flight-time">08:30</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Ciudad - MAD</div>
+                        </div>
+                        
+                        <div class="flight-line">
+                            <div class="flight-duration">
+                                <i class="far fa-clock"></i> 8h 30m
+                            </div>
+                        </div>
+                        
+                        <div class="flight-city">
+                            <div class="flight-time">17:00</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Paris - CDG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flight-info">
+                    <div class="flight-features">
+                        <div class="feature">
+                            <i class="fas fa-plane-departure"></i>
+                            <span>Directo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-suitcase"></i>
+                            <span>23kg equipaje</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Comida incluida</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>WiFi a bordo</span>
+                        </div>
+                    </div>
+                    <div class="flight-price-section">
+                        <div class="price-label">Precio por persona</div>
+                        <div class="flight-price">$599</div>
+                        <button class="select-btn">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flights-container">
+
+                <!-- Vuelo a Miami -->
+                <div class="flight-card">
+                    <div class="flight-header">
+                        <div class="airline">
+                            <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                            <div class="airline-name">Dominican Jet</div>
+                        </div>
+                    </div>
+                    <div class="flight-details">
+                        <div class="flight-route">
+                            <div class="flight-city">
+                                <div class="flight-time">08:30</div>
+                                <div class="flight-date">15 Mayo, 2025</div>
+                                <div class="flight-airport">Santo Domingo - SDQ</div>
+                            </div>
+                            <div class="flight-line">
+                                <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                            </div>
+                            <div class="flight-city">
+                                <div class="flight-time">11:15</div>
+                                <div class="flight-date">15 Mayo, 2025</div>
+                                <div class="flight-airport">Miami - MIA</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flight-info">
+                        <div class="flight-features">
+                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                        </div>
+                        <div class="flight-price-section">
+                            <div class="price-label">Precio por persona</div>
+                            <div class="flight-price">$299</div>
+                            <button class="select-btn">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Aquí van los demás vuelos -->
+            
+
+                <div class="flights-container">
+
+                    <!-- Vuelo a Miami -->
+                    <div class="flight-card">
+                        <div class="flight-header">
+                            <div class="airline">
+                                <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                <div class="airline-name">Dominican Jet</div>
+                            </div>
+                        </div>
+                        <div class="flight-details">
+                            <div class="flight-route">
+                                <div class="flight-city">
+                                    <div class="flight-time">08:30</div>
+                                    <div class="flight-date">15 Mayo, 2025</div>
+                                    <div class="flight-airport">Santo Domingo - SDQ</div>
+                                </div>
+                                <div class="flight-line">
+                                    <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                </div>
+                                <div class="flight-city">
+                                    <div class="flight-time">11:15</div>
+                                    <div class="flight-date">15 Mayo, 2025</div>
+                                    <div class="flight-airport">Miami - MIA</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="flight-features">
+                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                            </div>
+                            <div class="flight-price-section">
+                                <div class="price-label">Precio por persona</div>
+                                <div class="flight-price">$299</div>
+                                <button class="select-btn">Seleccionar</button>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Aquí van los demás vuelos -->
+
+                html
+                Copiar
+                Editar
+                <div class="flights-container">
+                
+                    <!-- Vuelo a Miami -->
+                    <div class="flight-card">... (ya incluido antes) ...</div>
+                
+                    <!-- Vuelo a Ciudad de México -->
+                    <div class="flight-card">
+                        <div class="flight-header">
+                            <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                        </div>
+                        <div class="flight-details">
+                            <div class="flight-route">
+                                <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                            </div>
+                        </div>
+                        <div class="flight-info"><div class="flight-features">
+                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                        </div>
+                        <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                    </div>
+
+
+
+                    <div class="flights-container">
+
+                        <!-- Vuelo a Miami -->
+                        <div class="flight-card">
+                            <div class="flight-header">
+                                <div class="airline">
+                                    <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                    <div class="airline-name">Dominican Jet</div>
+                                </div>
+                            </div>
+                            <div class="flight-details">
+                                <div class="flight-route">
+                                    <div class="flight-city">
+                                        <div class="flight-time">08:30</div>
+                                        <div class="flight-date">15 Mayo, 2025</div>
+                                        <div class="flight-airport">Santo Domingo - SDQ</div>
+                                    </div>
+                                    <div class="flight-line">
+                                        <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                    </div>
+                                    <div class="flight-city">
+                                        <div class="flight-time">11:15</div>
+                                        <div class="flight-date">15 Mayo, 2025</div>
+                                        <div class="flight-airport">Miami - MIA</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flight-info">
+                                <div class="flight-features">
+                                    <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                    <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                    <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                    <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                </div>
+                                <div class="flight-price-section">
+                                    <div class="price-label">Precio por persona</div>
+                                    <div class="flight-price">$299</div>
+                                    <button class="select-btn">Seleccionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Aquí van los demás vuelos -->
+               
+                    html
+                    Copiar
+                    Editar
+                    <div class="flights-container">
+                    
+                        <!-- Vuelo a Miami -->
+                        <div class="flight-card">... (ya incluido antes) ...</div>
+                    
+                        <!-- Vuelo a Ciudad de México -->
+                        <div class="flight-card">
+                            <div class="flight-header">
+                                <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                            </div>
+                            <div class="flight-details">
+                                <div class="flight-route">
+                                    <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                    <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                    <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                </div>
+                            </div>
+                            <div class="flight-info"><div class="flight-features">
+                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                            </div>
+                            <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                        </div>
+
+
+
+
+                        <div class="flights-container">
+
+                            <!-- Vuelo a Miami -->
+                            <div class="flight-card">
+                                <div class="flight-header">
+                                    <div class="airline">
+                                        <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                        <div class="airline-name">Dominican Jet</div>
+                                    </div>
+                                </div>
+                                <div class="flight-details">
+                                    <div class="flight-route">
+                                        <div class="flight-city">
+                                            <div class="flight-time">08:30</div>
+                                            <div class="flight-date">15 Mayo, 2025</div>
+                                            <div class="flight-airport">Santo Domingo - SDQ</div>
+                                        </div>
+                                        <div class="flight-line">
+                                            <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                        </div>
+                                        <div class="flight-city">
+                                            <div class="flight-time">11:15</div>
+                                            <div class="flight-date">15 Mayo, 2025</div>
+                                            <div class="flight-airport">Miami - MIA</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flight-info">
+                                    <div class="flight-features">
+                                        <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                        <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                        <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                        <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                    </div>
+                                    <div class="flight-price-section">
+                                        <div class="price-label">Precio por persona</div>
+                                        <div class="flight-price">$299</div>
+                                        <button class="select-btn">Seleccionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                   
+                        html
+                        Copiar
+                        Editar
+                        <div class="flights-container">
+                        
+                            <!-- Vuelo a Miami -->
+                            <div class="flight-card">... (ya incluido antes) ...</div>
+                        
+                            <!-- Vuelo a Ciudad de México -->
+                            <div class="flight-card">
+                                <div class="flight-header">
+                                    <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                </div>
+                                <div class="flight-details">
+                                    <div class="flight-route">
+                                        <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                        <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                        <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                    </div>
+                                </div>
+                                <div class="flight-info"><div class="flight-features">
+                                    <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                    <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                    <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                    <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                </div>
+                                <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                            </div>
+
+
+
+
+                            <div class="flights-container">
+
+                                <!-- Vuelo a Miami -->
+                                <div class="flight-card">
+                                    <div class="flight-header">
+                                        <div class="airline">
+                                            <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                            <div class="airline-name">Dominican Jet</div>
+                                        </div>
+                                    </div>
+                                    <div class="flight-details">
+                                        <div class="flight-route">
+                                            <div class="flight-city">
+                                                <div class="flight-time">08:30</div>
+                                                <div class="flight-date">15 Mayo, 2025</div>
+                                                <div class="flight-airport">Santo Domingo - SDQ</div>
+                                            </div>
+                                            <div class="flight-line">
+                                                <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                            </div>
+                                            <div class="flight-city">
+                                                <div class="flight-time">11:15</div>
+                                                <div class="flight-date">15 Mayo, 2025</div>
+                                                <div class="flight-airport">Miami - MIA</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flight-info">
+                                        <div class="flight-features">
+                                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                        </div>
+                                        <div class="flight-price-section">
+                                            <div class="price-label">Precio por persona</div>
+                                            <div class="flight-price">$299</div>
+                                            <button class="select-btn">Seleccionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- Aquí van los demás vuelos -->
+                         
+                            html
+                            Copiar
+                            Editar
+                            <div class="flights-container">
+                            
+                                <!-- Vuelo a Miami -->
+                                <div class="flight-card">... (ya incluido antes) ...</div>
+                            
+                                <!-- Vuelo a Ciudad de México -->
+                                <div class="flight-card">
+                                    <div class="flight-header">
+                                        <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                    </div>
+                                    <div class="flight-details">
+                                        <div class="flight-route">
+                                            <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                            <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                            <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                        </div>
+                                    </div>
+                                    <div class="flight-info"><div class="flight-features">
+                                        <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                        <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                        <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                        <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                    </div>
+                                    <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                </div>
+
+
+
+
+                                <div class="flights-container">
+
+                                    <!-- Vuelo a Miami -->
+                                    <div class="flight-card">
+                                        <div class="flight-header">
+                                            <div class="airline">
+                                                <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                <div class="airline-name">Dominican Jet</div>
+                                            </div>
+                                        </div>
+                                        <div class="flight-details">
+                                            <div class="flight-route">
+                                                <div class="flight-city">
+                                                    <div class="flight-time">08:30</div>
+                                                    <div class="flight-date">15 Mayo, 2025</div>
+                                                    <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                </div>
+                                                <div class="flight-line">
+                                                    <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                </div>
+                                                <div class="flight-city">
+                                                    <div class="flight-time">11:15</div>
+                                                    <div class="flight-date">15 Mayo, 2025</div>
+                                                    <div class="flight-airport">Miami - MIA</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flight-info">
+                                            <div class="flight-features">
+                                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                            </div>
+                                            <div class="flight-price-section">
+                                                <div class="price-label">Precio por persona</div>
+                                                <div class="flight-price">$299</div>
+                                                <button class="select-btn">Seleccionar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <!-- Aquí van los demás vuelos -->
+                       
+                                html
+                                Copiar
+                                Editar
+                                <div class="flights-container">
+                                
+                                    <!-- Vuelo a Miami -->
+                                    <div class="flight-card">
+                                
+                                    <!-- Vuelo a Ciudad de México -->
+                                    <div class="flight-card">
+                                        <div class="flight-header">
+                                            <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                        </div>
+                                        <div class="flight-details">
+                                            <div class="flight-route">
+                                                <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                            </div>
+                                        </div>
+                                        <div class="flight-info"><div class="flight-features">
+                                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                        </div>
+                                        <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                    </div>
+
+
+
+                                    <div class="flights-container">
+
+                                        <!-- Vuelo a Miami -->
+                                        <div class="flight-card">
+                                            <div class="flight-header">
+                                                <div class="airline">
+                                                    <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                    <div class="airline-name">Dominican Jet</div>
+                                                </div>
+                                            </div>
+                                            <div class="flight-details">
+                                                <div class="flight-route">
+                                                    <div class="flight-city">
+                                                        <div class="flight-time">08:30</div>
+                                                        <div class="flight-date">15 Mayo, 2025</div>
+                                                        <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                    </div>
+                                                    <div class="flight-line">
+                                                        <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                    </div>
+                                                    <div class="flight-city">
+                                                        <div class="flight-time">11:15</div>
+                                                        <div class="flight-date">15 Mayo, 2025</div>
+                                                        <div class="flight-airport">Miami - MIA</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flight-info">
+                                                <div class="flight-features">
+                                                    <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                    <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                    <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                    <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                </div>
+                                                <div class="flight-price-section">
+                                                    <div class="price-label">Precio por persona</div>
+                                                    <div class="flight-price">$299</div>
+                                                    <button class="select-btn">Seleccionar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <!-- Aquí van los demás vuelos -->
+                                    
+                                    
+                                    html
+                                    Copiar
+                                    Editar
+                                    <div class="flights-container">
+                                    
+                                        <!-- Vuelo a Miami -->
+                                        <div class="flight-card">
+                                    
+                                        <!-- Vuelo a Ciudad de México -->
+                                        <div class="flight-card">
+                                            <div class="flight-header">
+                                                <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                            </div>
+                                            <div class="flight-details">
+                                                <div class="flight-route">
+                                                    <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                    <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                    <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                </div>
+                                            </div>
+                                            <div class="flight-info"><div class="flight-features">
+                                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                            </div>
+                                            <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                        </div>
+
+
+
+                                        <div class="flights-container">
+
+                                            <!-- Vuelo a Miami -->
+                                            <div class="flight-card">
+                                                <div class="flight-header">
+                                                    <div class="airline">
+                                                        <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                        <div class="airline-name">Dominican Jet</div>
+                                                    </div>
+                                                </div>
+                                                <div class="flight-details">
+                                                    <div class="flight-route">
+                                                        <div class="flight-city">
+                                                            <div class="flight-time">08:30</div>
+                                                            <div class="flight-date">15 Mayo, 2025</div>
+                                                            <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                        </div>
+                                                        <div class="flight-line">
+                                                            <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                        </div>
+                                                        <div class="flight-city">
+                                                            <div class="flight-time">11:15</div>
+                                                            <div class="flight-date">15 Mayo, 2025</div>
+                                                            <div class="flight-airport">Miami - MIA</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="flight-info">
+                                                    <div class="flight-features">
+                                                        <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                        <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                        <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                        <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                    </div>
+                                                    <div class="flight-price-section">
+                                                        <div class="price-label">Precio por persona</div>
+                                                        <div class="flight-price">$299</div>
+                                                        <button class="select-btn">Seleccionar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <!-- Aquí van los demás vuelos -->
+                                      
+                                        
+                                        html
+                                        Copiar
+                                        Editar
+                                        <div class="flights-container">
+                                        
+                                            <!-- Vuelo a Miami -->
+                                            <div class="flight-card">... (ya incluido antes) ...</div>
+                                        
+                                            <!-- Vuelo a Ciudad de México -->
+                                            <div class="flight-card">
+                                                <div class="flight-header">
+                                                    <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                </div>
+                                                <div class="flight-details">
+                                                    <div class="flight-route">
+                                                        <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                        <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                        <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flight-info"><div class="flight-features">
+                                                    <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                    <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                    <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                    <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                </div>
+                                                <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                            </div>
+
+
+
+
+                                            <div class="flights-container">
+
+                                                <!-- Vuelo a Miami -->
+                                                <div class="flight-card">
+                                                    <div class="flight-header">
+                                                        <div class="airline">
+                                                            <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                            <div class="airline-name">Dominican Jet</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flight-details">
+                                                        <div class="flight-route">
+                                                            <div class="flight-city">
+                                                                <div class="flight-time">08:30</div>
+                                                                <div class="flight-date">15 Mayo, 2025</div>
+                                                                <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                            </div>
+                                                            <div class="flight-line">
+                                                                <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                            </div>
+                                                            <div class="flight-city">
+                                                                <div class="flight-time">11:15</div>
+                                                                <div class="flight-date">15 Mayo, 2025</div>
+                                                                <div class="flight-airport">Miami - MIA</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flight-info">
+                                                        <div class="flight-features">
+                                                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                        </div>
+                                                        <div class="flight-price-section">
+                                                            <div class="price-label">Precio por persona</div>
+                                                            <div class="flight-price">$299</div>
+                                                            <button class="select-btn">Seleccionar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <!-- Aquí van los demás vuelos -->
+                                            
+                                            
+                                            html
+                                            Copiar
+                                            Editar
+                                            <div class="flights-container">
+                                            
+                                                <!-- Vuelo a Miami -->
+                                                <div class="flight-card">... (ya incluido antes) ...</div>
+                                            
+                                                <!-- Vuelo a Ciudad de México -->
+                                                <div class="flight-card">
+                                                    <div class="flight-header">
+                                                        <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                    </div>
+                                                    <div class="flight-details">
+                                                        <div class="flight-route">
+                                                            <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                            <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                            <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flight-info"><div class="flight-features">
+                                                        <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                        <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                        <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                        <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                    </div>
+                                                    <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                                </div>
+
+                                                <div class="flights-container">
+
+                                                    <!-- Vuelo a Miami -->
+                                                    <div class="flight-card">
+                                                        <div class="flight-header">
+                                                            <div class="airline">
+                                                                <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                                <div class="airline-name">Dominican Jet</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-details">
+                                                            <div class="flight-route">
+                                                                <div class="flight-city">
+                                                                    <div class="flight-time">08:30</div>
+                                                                    <div class="flight-date">15 Mayo, 2025</div>
+                                                                    <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                                </div>
+                                                                <div class="flight-line">
+                                                                    <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                                </div>
+                                                                <div class="flight-city">
+                                                                    <div class="flight-time">11:15</div>
+                                                                    <div class="flight-date">15 Mayo, 2025</div>
+                                                                    <div class="flight-airport">Miami - MIA</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-info">
+                                                            <div class="flight-features">
+                                                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                            </div>
+                                                            <div class="flight-price-section">
+                                                                <div class="price-label">Precio por persona</div>
+                                                                <div class="flight-price">$299</div>
+                                                                <button class="select-btn">Seleccionar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <!-- Aquí van los demás vuelos -->
+                                           
+                                                
+                                                html
+                                                Copiar
+                                                Editar
+                                                <div class="flights-container">
+                                                
+                                                    <!-- Vuelo a Miami -->
+                                                    <div class="flight-card">... (ya incluido antes) ...</div>
+                                                
+                                                    <!-- Vuelo a Ciudad de México -->
+                                                    <div class="flight-card">
+                                                        <div class="flight-header">
+                                                            <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                        </div>
+                                                        <div class="flight-details">
+                                                            <div class="flight-route">
+                                                                <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                                <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                                <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-info"><div class="flight-features">
+                                                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                        </div>
+                                                        <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                                    </div>
+
+
+
+                                                    <div class="flights-container">
+
+                                                        <!-- Vuelo a Miami -->
+                                                        <div class="flight-card">
+                                                            <div class="flight-header">
+                                                                <div class="airline">
+                                                                    <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                                    <div class="airline-name">Dominican Jet</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flight-details">
+                                                                <div class="flight-route">
+                                                                    <div class="flight-city">
+                                                                        <div class="flight-time">08:30</div>
+                                                                        <div class="flight-date">15 Mayo, 2025</div>
+                                                                        <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                                    </div>
+                                                                    <div class="flight-line">
+                                                                        <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                                    </div>
+                                                                    <div class="flight-city">
+                                                                        <div class="flight-time">11:15</div>
+                                                                        <div class="flight-date">15 Mayo, 2025</div>
+                                                                        <div class="flight-airport">Miami - MIA</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flight-info">
+                                                                <div class="flight-features">
+                                                                    <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                    <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                    <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                    <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                </div>
+                                                                <div class="flight-price-section">
+                                                                    <div class="price-label">Precio por persona</div>
+                                                                    <div class="flight-price">$299</div>
+                                                                    <button class="select-btn">Seleccionar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <!-- Aquí van los demás vuelos -->
+                                                  
+                                                    
+                                                    html
+                                                    Copiar
+                                                    Editar
+                                                    <div class="flights-container">
+                                                    
+                                                        <!-- Vuelo a Miami -->
+                                                        <div class="flight-card">... (ya incluido antes) ...</div>
+                                                    
+                                                        <!-- Vuelo a Ciudad de México -->
+                                                        <div class="flight-card">
+                                                            <div class="flight-header">
+                                                                <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                            </div>
+                                                            <div class="flight-details">
+                                                                <div class="flight-route">
+                                                                    <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                                    <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                                    <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flight-info"><div class="flight-features">
+                                                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                            </div>
+                                                            <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                                        </div>
+
+
+
+                                                        <div class="flights-container">
+
+                                                            <!-- Vuelo a Miami -->
+                                                            <div class="flight-card">
+                                                                <div class="flight-header">
+                                                                    <div class="airline">
+                                                                        <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                                        <div class="airline-name">Dominican Jet</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flight-details">
+                                                                    <div class="flight-route">
+                                                                        <div class="flight-city">
+                                                                            <div class="flight-time">08:30</div>
+                                                                            <div class="flight-date">15 Mayo, 2025</div>
+                                                                            <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                                        </div>
+                                                                        <div class="flight-line">
+                                                                            <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                                        </div>
+                                                                        <div class="flight-city">
+                                                                            <div class="flight-time">11:15</div>
+                                                                            <div class="flight-date">15 Mayo, 2025</div>
+                                                                            <div class="flight-airport">Miami - MIA</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flight-info">
+                                                                    <div class="flight-features">
+                                                                        <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                        <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                        <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                        <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                    </div>
+                                                                    <div class="flight-price-section">
+                                                                        <div class="price-label">Precio por persona</div>
+                                                                        <div class="flight-price">$299</div>
+                                                                        <button class="select-btn">Seleccionar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                            <!-- Aquí van los demás vuelos -->
+                         
+                                                        
+                                                        html
+                                                        Copiar
+                                                        Editar
+                                                        <div class="flights-container">
+                                                        
+                                                            <!-- Vuelo a Miami -->
+                                                            <div class="flight-card">... (ya incluido antes) ...</div>
+                                                        
+                                                            <!-- Vuelo a Ciudad de México -->
+                                                            <div class="flight-card">
+                                                                <div class="flight-header">
+                                                                    <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                                </div>
+                                                                <div class="flight-details">
+                                                                    <div class="flight-route">
+                                                                        <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                                        <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                                        <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flight-info"><div class="flight-features">
+                                                                    <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                    <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                    <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                    <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                </div>
+                                                                <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                                            </div>
+
+
+
+
+                                                            <div class="flights-container">
+
+                                                                <!-- Vuelo a Miami -->
+                                                                <div class="flight-card">
+                                                                    <div class="flight-header">
+                                                                        <div class="airline">
+                                                                            <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                                            <div class="airline-name">Dominican Jet</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flight-details">
+                                                                        <div class="flight-route">
+                                                                            <div class="flight-city">
+                                                                                <div class="flight-time">08:30</div>
+                                                                                <div class="flight-date">15 Mayo, 2025</div>
+                                                                                <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                                            </div>
+                                                                            <div class="flight-line">
+                                                                                <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                                            </div>
+                                                                            <div class="flight-city">
+                                                                                <div class="flight-time">11:15</div>
+                                                                                <div class="flight-date">15 Mayo, 2025</div>
+                                                                                <div class="flight-airport">Miami - MIA</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flight-info">
+                                                                        <div class="flight-features">
+                                                                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                        </div>
+                                                                        <div class="flight-price-section">
+                                                                            <div class="price-label">Precio por persona</div>
+                                                                            <div class="flight-price">$299</div>
+                                                                            <button class="select-btn">Seleccionar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                                <!-- Aquí van los demás vuelos -->
+                                                        
+                                                            
+                                                            html
+                                                            Copiar
+                                                            Editar
+                                                            <div class="flights-container">
+                                                            
+                                                                <!-- Vuelo a Miami -->
+                                                                <div class="flight-card">... (ya incluido antes) ...</div>
+                                                            
+                                                                <!-- Vuelo a Ciudad de México -->
+                                                                <div class="flight-card">
+                                                                    <div class="flight-header">
+                                                                        <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                                    </div>
+                                                                    <div class="flight-details">
+                                                                        <div class="flight-route">
+                                                                            <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                                            <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                                            <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flight-info"><div class="flight-features">
+                                                                        <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                        <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                        <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                        <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                    </div>
+                                                                    <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                                                </div>
+
+
+
+                                                                <div class="flights-container">
+
+                                                                    <!-- Vuelo a Miami -->
+                                                                    <div class="flight-card">
+                                                                        <div class="flight-header">
+                                                                            <div class="airline">
+                                                                                <div class="airline-logo"><i class="fas fa-plane"></i></div>
+                                                                                <div class="airline-name">Dominican Jet</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flight-details">
+                                                                            <div class="flight-route">
+                                                                                <div class="flight-city">
+                                                                                    <div class="flight-time">08:30</div>
+                                                                                    <div class="flight-date">15 Mayo, 2025</div>
+                                                                                    <div class="flight-airport">Santo Domingo - SDQ</div>
+                                                                                </div>
+                                                                                <div class="flight-line">
+                                                                                    <div class="flight-duration"><i class="far fa-clock"></i> 2h 45m</div>
+                                                                                </div>
+                                                                                <div class="flight-city">
+                                                                                    <div class="flight-time">11:15</div>
+                                                                                    <div class="flight-date">15 Mayo, 2025</div>
+                                                                                    <div class="flight-airport">Miami - MIA</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flight-info">
+                                                                            <div class="flight-features">
+                                                                                <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                                <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                                <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                                <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                            </div>
+                                                                            <div class="flight-price-section">
+                                                                                <div class="price-label">Precio por persona</div>
+                                                                                <div class="flight-price">$299</div>
+                                                                                <button class="select-btn">Seleccionar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                    <!-- Aquí van los demás vuelos -->
+
+                                                                
+                                                                html
+                                                                Copiar
+                                                                Editar
+                                                                <div class="flights-container">
+                                                                
+                                                                    <!-- Vuelo a Miami -->
+                                                                    <div class="flight-card">... (ya incluido antes) ...</div>
+                                                                
+                                                                    <!-- Vuelo a Ciudad de México -->
+                                                                    <div class="flight-card">
+                                                                        <div class="flight-header">
+                                                                            <div class="airline"><div class="airline-logo"><i class="fas fa-plane"></i></div><div class="airline-name">Dominican Jet</div></div>
+                                                                        </div>
+                                                                        <div class="flight-details">
+                                                                            <div class="flight-route">
+                                                                                <div class="flight-city"><div class="flight-time">07:00</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">Santo Domingo - SDQ</div></div>
+                                                                                <div class="flight-line"><div class="flight-duration"><i class="far fa-clock"></i> 4h 50m</div></div>
+                                                                                <div class="flight-city"><div class="flight-time">11:50</div><div class="flight-date">15 Mayo, 2025</div><div class="flight-airport">CDMX - MEX</div></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="flight-info"><div class="flight-features">
+                                                                            <div class="feature"><i class="fas fa-plane-departure"></i><span>Directo</span></div>
+                                                                            <div class="feature"><i class="fas fa-suitcase"></i><span>23kg equipaje</span></div>
+                                                                            <div class="feature"><i class="fas fa-utensils"></i><span>Comida incluida</span></div>
+                                                                            <div class="feature"><i class="fas fa-wifi"></i><span>WiFi a bordo</span></div>
+                                                                        </div>
+                                                                        <div class="flight-price-section"><div class="price-label">Precio por persona</div><div class="flight-price">$390</div><button class="select-btn">Seleccionar</button></div></div>
+                                                                    </div>
+
+
+
+            <!-- Vuelo 2 -->
+            <div class="flight-card">
+                <div class="flight-header">
+                    <div class="airline">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="airline-name">Dominican Jet</div>
+                    </div>
+                    <div class="flight-class"></div>
+                </div>
+                <div class="flight-details">
+                    <div class="flight-route">
+                        <div class="flight-city">
+                            <div class="flight-time">14:15</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Ciudad - MAD</div>
+                        </div>
+                        
+                        <div class="flight-line">
+                            <div class="flight-duration">
+                                <i class="far fa-clock"></i> 8h 30m
+                            </div>
+                        </div>
+                        
+                        <div class="flight-city">
+                            <div class="flight-time">22:45</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Paris - CDG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flight-info">
+                    <div class="flight-features">
+                        <div class="feature">
+                            <i class="fas fa-plane-departure"></i>
+                            <span>Directo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-suitcase"></i>
+                            <span>23kg equipaje</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Comida incluida</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>WiFi a bordo</span>
+                        </div>
+                    </div>
+                    <div class="flight-price-section">
+                        <div class="price-label">Precio por persona</div>
+                        <div class="flight-price">$629</div>
+                        <button class="select-btn">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vuelo 3 con escala -->
+            <div class="flight-card">
+                <div class="flight-header">
+                    <div class="airline">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="airline-name">Dominican Jet</div>
+                    </div>
+                    <div class="flight-class"></div>
+                </div>
+                <div class="flight-details">
+                    <div class="flight-route">
+                        <div class="flight-city">
+                            <div class="flight-time">10:20</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Ciudad - MAD</div>
+                        </div>
+                        
+                        <div class="flight-line with-stop">
+                            <div class="flight-duration">
+                                <i class="far fa-clock"></i> 11h 15m
+                            </div>
+                        </div>
+                        
+                        <div class="flight-city">
+                            <div class="flight-time">21:35</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Paris - CDG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flight-stop">
+                    <p><i class="fas fa-exchange-alt"></i> 1 escala en Frankfurt (FRA)  2h 15m</p>
+                </div>
+                <div class="flight-info">
+                    <div class="flight-features">
+                        <div class="feature">
+                            <i class="fas fa-plane-departure"></i>
+                            <span>1 escala</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-suitcase"></i>
+                            <span>23kg equipaje</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Comida incluida</span>
+                        </div>
+                    </div>
+                    <div class="flight-price-section">
+                        <div class="price-label">Precio por persona</div>
+                        <div class="flight-price">$549</div>
+                        <button class="select-btn">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vuelo 4 nocturno -->
+            <div class="flight-card">
+                <div class="flight-header">
+                    <div class="airline">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="airline-name">Dominican Jet</div>
+                    </div>
+                    <div class="flight-class"></div>
+                </div>
+                <div class="flight-details">
+                    <div class="flight-route">
+                        <div class="flight-city">
+                            <div class="flight-time">18:00</div>
+                            <div class="flight-date">15 Mayo, 2025</div>
+                            <div class="flight-airport">Ciudad - MAD</div>
+                        </div>
+                        
+                        <div class="flight-line">
+                            <div class="flight-duration">
+                                <i class="far fa-clock"></i> 8h 45m
+                            </div>
+                        </div>
+                        
+                        <div class="flight-city">
+                            <div class="flight-time">10:45</div>
+                            <div class="flight-date">16 Mayo, 2025</div>
+                            <div class="flight-airport">Paris - CDG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flight-info">
+                    <div class="flight-features">
+                        <div class="feature">
+                            <i class="fas fa-plane-departure"></i>
+                            <span>Directo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-suitcase"></i>
+                            <span>23kg equipaje</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Comida incluida</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-moon"></i>
+                            <span>Vuelo nocturno</span>
+                        </div>
+                    </div>
+                    <div class="flight-price-section">
+                        <div class="price-label">Precio por persona</div>
+                        <div class="flight-price">$589</div>
+                        <button class="select-btn">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="more-options">
+                <button class="load-more">Cargar mas opciones</button>
+            </div>
+        </div>
+    </section>
+
+            
+
+                <footer>
+                    <div class="footer-content">
+                        <div class="footer-column">
+                            <h3>Dominican Jet</h3>
+                            <p>La aerolínea líder de República Dominicana, comprometida con la excelencia en servicio y seguridad aérea.</p>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/dominican_jet"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Enlaces rapidos</h3>
+                            <ul>
+                                <li><a href="#inicio">Inicio</a></li>
+                                <li><a href="#destinos">Destinos</a></li>
+                                <li><a href="#servicios">Servicios</a></li>
+                                <li><a href="#reservar">Reservar</a></li>
+                                <li><a href="#">Ofertas</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Informacion</h3>
+                            <ul>
+                                <li><a href="#">Sobre nosotros</a></li>
+                                <li><a href="#">Politica de equipaje</a></li>
+                                <li><a href="#">Preguntas frecuentes</a></li>
+                                <li><a href="#">Terminos y condiciones</a></li>
+                                <li><a href="#">Politica de privacidad</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Contacto</h3>
+                            <ul>
+                                <li><i class="fas fa-map-marker-alt"></i> Blue mall piso 1 </li>
+                                <li><i class="fas fa-phone"></i> +1 (829) 610-1259</li>
+                                <li><i class="fas fa-envelope"></i> DominicanJet18@gmail.com.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2025 Aerolinea Dominican Jet - Todos los derechos reservados.
+                            </html>
